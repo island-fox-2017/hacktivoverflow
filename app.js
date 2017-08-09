@@ -15,9 +15,14 @@ app.use(bodyParser.json({type: 'application/x-www-form-urlencoded'}))
 
 app.use(cors());
 
+const user = require('./routes/user')
+const question = require('./routes/question')
+
 app.get('/', function(req,res){
   res.send('hello its me')
 })
 
+app.use('/user', user)
+app.use('/question', question)
 
 app.listen(3000)
