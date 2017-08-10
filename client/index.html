@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hacktiv Overflow</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://bootswatch.com/sandstone/bootstrap.min.css">
+
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style media="screen">
+    .verticalLine {
+      border-left: 1px solid #ababab;
+      }
+    </style>
+
+  </head>
+  <body>
+    <!-- NAV -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Hacktiv Overflow</a>
+          </div>
+
+          <div class="collapse navbar-collapse">
+            <form class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                <input class="form-control" placeholder="Search" type="text">
+              </div>
+              <button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-search"></i></button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#" data-toggle="modal" data-target="#myModal">Login or Join</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- END NAV -->
+
+      <!-- MODAL LOGIN REGISTER -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h5 class="text-center" >Login or Join</h5>
+              <hr>
+              <!-- LOGIN FORM -->
+              <div class="col-md-6">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" placeholder="Username" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <input type="password" class="form-control" placeholder="Password" required>
+                    </div>
+                  </div>
+                  <div class="form-group text-right">
+                    <div class="col-sm-12">
+                      <button type="button" class="btn btn-danger">Login</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- END LOGIN FORM -->
+              <!-- REGISTER FROM -->
+              <div class="col-md-6 verticalLine">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" placeholder="Username" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" placeholder="Name" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <input type="email" class="form-control" placeholder="Email" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <input type="password" class="form-control" placeholder="Password" required>
+                    </div>
+                  </div>
+                  <div class="form-group text-right">
+                    <div class="col-sm-12">
+                      <button type="button" class="btn btn-danger">Register</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- END REGISTER FROM -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END MODAL LOGIN -->
+
+      <!-- MAIN CONTENT -->
+      <div class="container">
+        <div class="col-md-8">
+          <div class="container-fluid">
+            <hr>
+            <!-- INPUT TITLE -->
+            <div class="form-group">
+              <input data-toggle="collapse" data-target="#demo" class="form-control" placeholder="Click Here to start new Question..." type="text">
+            </div>
+            <div class="collapse" id="demo">
+              <div class="form-group">
+                <textarea class="form-control" placeholder="Content...." rows="3"></textarea>
+              </div>
+              <div class="form-group text-right">
+                <button type="submit" class="btn btn-warning">Create Topic</button>
+                <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#demo">Cancel</button>
+              </div>
+            </div>
+            <!-- END INPUT TITLE -->
+            <!-- LIST QUESTIOn -->
+            <div class="list-group">
+              <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">List group item heading</h4>
+                <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+              </a>
+              <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">List group item heading</h4>
+                <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+              </a>
+              <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">List group item heading</h4>
+                <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+              </a>
+              <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">List group item heading</h4>
+                <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+              </a>
+            </div>
+            <!-- END QUESTIOn -->
+          </div>
+        </div>
+
+        <!-- SIDE BAR -->
+        <div class="col-md-4">
+          <div class="container-fluid">
+            <hr>
+            <h5>Statistic</h5>
+            <hr>
+            <ul class="list-group">
+              <li class="list-group-item active">
+                <span class="badge">14</span>
+                MEMBERS
+              </li>
+              <li class="list-group-item active">
+                <span class="badge">192</span>
+                THREADS
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- END SIDE BAR -->
+      </div>
+      <!-- END MAIN CONTENT -->
+  </body>
+</html>
