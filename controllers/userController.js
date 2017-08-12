@@ -41,7 +41,7 @@ function login(req,res){
         username: response.username
       }, 'AssFF9')
       req.headers.token = token
-      res.json({token:token, id: response._id})
+      res.json({token:token, id: response._id, name: response.name})
     }else {
       res.send('Wrong Password!')
     }
@@ -54,7 +54,19 @@ function login(req,res){
   })
 }
 
+function getUserCount(req,res){
+  User.find()
+  .then(response=>{
+    const members = response.length
+    res.send({count: members})
+  })
+  .catch(err=>{
+    res.send(err)
+  })
+}
+
 module.exports = {
   register,
-  login
+  login,
+  getUserCount
 };

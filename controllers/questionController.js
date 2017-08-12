@@ -5,6 +5,7 @@ const Question = require('../models/Question')
 
 function getAllQuestion(req,res){
   Question.find()
+  .populate('author', 'name username email')
   .then(response=>{
     res.send(response)
   })
@@ -27,7 +28,7 @@ function createQuestion(req,res){
   Question.create({
     title: req.body.title,
     content: req.body.content,
-    author: req.body.id,
+    author: req.body.author,
     answer: [],
     upvotes: [],
     downvotes: []
