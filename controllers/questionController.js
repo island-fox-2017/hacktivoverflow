@@ -75,7 +75,12 @@ function addAnswer(req,res){
   })
   .update({
     $push:{
-      answer: req.body.answer
+      answer: {
+        author: req.body.author,
+        content: req.body.content,
+        upvotes: [],
+        downvotes: []
+      }
     }
   })
   .then(response=>{

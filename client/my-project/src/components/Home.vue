@@ -1,19 +1,17 @@
 <template>
   <div class="container-fluid">
     <headers :user="user" @gantiNama="ganti" @hapusNama="hapus"></headers>
-    <MainContent :user="user" :questions="questions" :count="count"></MainContent>
+    <router-view :user="user" :questions="questions" :count="count"></router-view>
   </div>
 </template>
 
 <script>
   import Headers from '@/components/Headers'
-  import MainContent from '@/components/MainContent'
   import axios from 'axios'
   export default{
     name: 'home',
     components: {
-      Headers,
-      MainContent
+      Headers
     },
     data: function () {
       return {

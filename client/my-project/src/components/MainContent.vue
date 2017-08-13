@@ -7,7 +7,7 @@
         <AddQuestion :user="user" :questions="questions"></AddQuestion>
         <!-- END INPUT TITLE -->
         <!-- LIST QUESTIOn -->
-        <question :questions="questions"></question>
+        <router-view :questions="questions"></router-view>
         <!-- END QUESTIOn -->
       </div>
     </div>
@@ -20,14 +20,12 @@
 
 <script>
   import Sidebar from '@/components/Sidebar'
-  import Question from '@/components/Question'
   import AddQuestion from '@/components/AddQuestion'
   export default{
     props: ['questions', 'count', 'user'],
     name: 'maincontent',
     components: {
       Sidebar,
-      Question,
       AddQuestion
     }
   }
