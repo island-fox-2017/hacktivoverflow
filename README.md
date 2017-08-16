@@ -15,5 +15,6 @@ List of hacktiv-overflow routes:
 | /question               |POST           | post new question|
 | /question/:id           |DELETE         | delete question|
 | /question/:id           |PUT            | edit question|
+| /question/:id/:iduser  |PUT            | voting specify question|
 | /question/:id/answer    |PUT            | Put answer to the question|
 | /question/:id/answer/:id|DELETE         | Delete answer From the question|

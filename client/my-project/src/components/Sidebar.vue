@@ -10,7 +10,7 @@
           MEMBERS
         </li>
         <li class="list-group-item active">
-          <span class="badge">{{count}}</span>
+          <span class="badge">{{getCountQuest}}</span>
           THREADS
         </li>
       </ul>
@@ -20,6 +20,7 @@
 
 <script>
   import axios from 'axios'
+  import { mapGetters } from 'vuex'
   export default{
     props: ['count'],
     name: 'sidebar',
@@ -27,6 +28,11 @@
       return {
         members: 0
       }
+    },
+    computed: {
+      ...mapGetters([
+        'getCountQuest'
+      ])
     },
     mounted: function () {
       const self = this

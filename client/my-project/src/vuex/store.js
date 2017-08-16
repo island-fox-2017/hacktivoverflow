@@ -6,14 +6,32 @@ Vue.use(Vuex)
 
 const initialState = {
   questions: [],
-  question: ''
+  question: '',
+  userId: localStorage.getItem('id'),
+  username: localStorage.getItem('name')
 }
 
 export default new Vuex.Store({
   state: {
     ...initialState
   },
+  getters: {
+    getCountQuest (state) {
+      return state.questions.length
+    }
+  },
   mutations: {
+    clearState (state) {
+      state.userId = ''
+      state.username = ''
+      localStorage.clear()
+    },
+    setUser (state, payload) {
+      state.username = payload
+    },
+    setId (state, payload) {
+      state.userId = payload
+    },
     setQuestion (state, payload) {
       state.question = payload
     },
@@ -83,6 +101,42 @@ export default new Vuex.Store({
       .catch(err => {
         console.log(err)
       })
+    },
+    voteQuestion ({ commit, dispatch }, payload) {
+      console.log(payload)
+      axios.put(`http://localhost:3000/question/${payload.id}/${payload.idUser}`, {
+        status: payload.status
+      })
+      .then(response => {
+        dispatch('getAllQuestions')
+        console.log('sukses vote')
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    loginTo ({ commit }, payload) {
+      axios.post('http://localhost:3000/user/login', {
+        username: payload.username,
+        password: payload.password
+      })
+      .then(response => {
+        if (response.data.token) {
+          localStorage.setItem('token', response.data.token)
+          localStorage.setItem('id', response.data.id)
+          localStorage.setItem('name', response.data.name)
+          commit('setUser', response.data.name)
+          commit('setId', response.data.id)
+        } else {
+          alert('User not found or wrong password')
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    logoutFrom ({ commit }) {
+      commit('clearState')
     }
   }
 })

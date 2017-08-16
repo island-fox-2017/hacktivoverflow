@@ -7,7 +7,7 @@
     </div>
     <div v-for="answer in question.answer" href="#" class="list-group-item">
       <p class="list-group-item-text">{{answer.content}}</p>
-      <p class="list-group-item-text">{{answer.author}}</p>
+      <p class="list-group-item-text">by: {{answer.author.name}}</p>
     </div>
     <AddAnswer></AddAnswer>
   </div>

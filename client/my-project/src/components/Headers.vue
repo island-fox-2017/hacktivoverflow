@@ -18,26 +18,30 @@
         </ul>
       </div>
     </div>
-    <modal :user="user" @gantiLagi="gantiUser"></modal>
+    <modal :user="user"></modal>
   </nav>
 </template>
 
 <script>
 import Modal from '@/components/Modal'
+import { mapActions } from 'vuex'
 export default{
-  props: ['user'],
   name: 'headers',
   components: {
     Modal
   },
+  computed: {
+    user () {
+      return this.$store.state.username
+    }
+  },
   methods: {
+    ...mapActions([
+      'logoutFrom'
+    ]),
     logout: function () {
-      localStorage.clear()
-      this.$emit('hapusNama')
+      this.logoutFrom()
       console.log('anda logout')
-    },
-    gantiUser: function (name) {
-      this.$emit('gantiNama', name)
     }
   }
 }

@@ -21,7 +21,6 @@
   import { mapActions } from 'vuex'
   export default{
     name: 'addquestion',
-    props: ['user'],
     data: function () {
       return {
         formQuest: {
@@ -31,6 +30,11 @@
             return localStorage.getItem('id')
           }
         }
+      }
+    },
+    computed: {
+      user () {
+        return this.$store.state.username
       }
     },
     methods: {

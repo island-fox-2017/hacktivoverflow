@@ -8,5 +8,6 @@ router.get('/', controller.getAllQuestion)
 router.get('/:id', controller.getOneQuestion)
 router.post('/', controller.createQuestion)
 router.post('/:id/answer', controller.addAnswer)
+router.put('/:id/:iduser', controller.voteQuestion)
 
 module.exports = router;

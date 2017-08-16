@@ -2,10 +2,66 @@
 
 const Question = require('../models/Question')
 
+function voteQuestion(req,res) {
+  Question.findById(req.params.id)
+  .then(response => {
+    var status = false
+
+    for (let i = 0; i < response.downvotes.length; i++) {
+      response.upvotes[i] == req.params.iduser
+      status = true
+    }
+
+    for (let i = 0; i < response.upvotes.length; i++) {
+      response.upvotes[i] == req.params.iduser
+      status = true
+    }
+
+    if(status){
+      res.send({msg: 'Already Vote'})
+    }else {
+      if(req.body.status == 'up'){
+        Question.where({
+          _id: req.params.id
+        })
+        .update({
+          $push: {
+            upvotes: req.params.iduser
+          }
+        })
+        .then(response => {
+          res.send({msg: 'voteSukses'})
+        })
+        .catch(err => {
+          res.send(err)
+        })
+      }else {
+        Question.where({
+          _id: req.params.id
+        })
+        .update({
+          $push: {
+            downvotes: req.params.iduser
+          }
+        })
+        .then(response => {
+          res.send({msg: 'voteSukses'})
+        })
+        .catch(err => {
+          res.send(err)
+        })
+      }
+    }
+  })
+  .catch(err => {
+    res.send(err)
+  })
+}
 
 function getAllQuestion(req,res){
   Question.find()
   .populate('author', 'name username email')
+  .populate('answer.author', 'name username email')
   .then(response=>{
     res.send(response)
   })
@@ -17,6 +73,7 @@ function getAllQuestion(req,res){
 function getOneQuestion(req,res){
   Question.findById(req.params.id)
   .populate('author', 'name username email')
+  .populate('answer.author', 'name username email')
   .then(response=>{
     res.send(response)
   })
@@ -98,5 +155,6 @@ module.exports = {
   getOneQuestion,
   createQuestion,
   addAnswer,
-  deleteQuestion
+  deleteQuestion,
+  voteQuestion
 };

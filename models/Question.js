@@ -19,8 +19,8 @@ const questionSchema = Schema({
     required: true
   },
   answer: [answerSchema],
-  upvotes: [{type: Schema.Types.ObjectId, ref: 'User', unique: true}],
-  downvotes: [{type: Schema.Types.ObjectId, ref: 'User', unique: true}]
+  upvotes: [{type: Schema.Types.ObjectId, ref: 'User'}],
+  downvotes: [{type: Schema.Types.ObjectId, ref: 'User'}]
 },{
   timestamps:true
 })
