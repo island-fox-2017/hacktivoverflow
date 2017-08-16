@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-6">
-    <form class="form-horizontal" @submit.prevent="login()">
+    <form class="form-horizontal">
       <div class="form-group">
         <div class="col-sm-12">
           <input v-model="username" type="text" class="form-control" placeholder="Username" required>
@@ -13,7 +13,7 @@
       </div>
       <div class="form-group text-right">
         <div class="col-sm-12">
-          <button type="submit" class="btn btn-danger">Login</button>
+          <button type="button" class="btn btn-danger" @click="login()" data-dismiss="modal">Login</button>
         </div>
       </div>
     </form>
@@ -28,7 +28,8 @@
     data: function () {
       return {
         username: '',
-        password: ''
+        password: '',
+        status: ''
       }
     },
     methods: {
@@ -49,6 +50,7 @@
           self.setUser(response.data.name)
           self.username = ''
           self.password = ''
+          self.status = 'modal'
         })
         .catch(err => {
           console.log(err)

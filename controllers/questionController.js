@@ -16,6 +16,7 @@ function getAllQuestion(req,res){
 
 function getOneQuestion(req,res){
   Question.findById(req.params.id)
+  .populate('author', 'name username email')
   .then(response=>{
     res.send(response)
   })

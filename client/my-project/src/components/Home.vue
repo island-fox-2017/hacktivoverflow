@@ -16,7 +16,7 @@
     data: function () {
       return {
         questions: '',
-        user: ''
+        user: localStorage.getItem('name')
       }
     },
     computed: {

@@ -17,10 +17,11 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  // import axios from 'axios'
+  import { mapActions } from 'vuex'
   export default{
     name: 'addquestion',
-    props: ['questions', 'user'],
+    props: ['user'],
     data: function () {
       return {
         formQuest: {
@@ -33,22 +34,13 @@
       }
     },
     methods: {
+      ...mapActions([
+        'pushQuestions'
+      ]),
       postQuest: function () {
-        const self = this
-        axios.post('http://localhost:3000/question', {
-          title: self.formQuest.title,
-          content: self.formQuest.content,
-          author: self.formQuest.author
-        })
-        .then(response => {
-          self.questions.push(response.data)
-          self.formQuest.title = ''
-          self.formQuest.content = ''
-          console.log(response)
-        })
-        .catch(err => {
-          console.log(err)
-        })
+        this.pushQuestions(this.formQuest)
+        this.formQuest.title = ''
+        this.formQuest.content = ''
       }
     }
   }
