@@ -29,6 +29,9 @@ export default new Vuex.Store({
     setUser (state, payload) {
       state.username = payload
     },
+    setToken (state, payload) {
+      state.token = payload
+    },
     setId (state, payload) {
       state.userId = payload
     },
@@ -66,14 +69,19 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-    pushQuestions ({ commit }, data) {
+    pushQuestions ({ commit, dispatch }, data) {
       axios.post('http://localhost:3000/question', {
         title: data.title,
         content: data.content,
         author: data.author
+      }, {
+        headers: {
+          token: localStorage.getItem('token')
+        }
       })
       .then(response => {
         commit('pushQuestion', response.data)
+        dispatch('getAllQuestions')
       })
       .catch(err => {
         console.log(err)
@@ -83,6 +91,10 @@ export default new Vuex.Store({
       axios.post(`http://localhost:3000/question/${payload.id}/answer`, {
         author: payload.data.author,
         content: payload.data.content
+      }, {
+        headers: {
+          token: localStorage.getItem('token')
+        }
       })
       .then(response => {
         var id = payload.id
@@ -106,8 +118,13 @@ export default new Vuex.Store({
       console.log(payload)
       axios.put(`http://localhost:3000/question/${payload.id}/${payload.idUser}`, {
         status: payload.status
+      }, {
+        headers: {
+          token: localStorage.getItem('token')
+        }
       })
       .then(response => {
+        dispatch('getOneQuestion', payload.id)
         dispatch('getAllQuestions')
         console.log('sukses vote')
       })

@@ -1,14 +1,34 @@
 <template>
   <div class="list-group">
-    <div href="#" class="list-group-item">
-      <h4 class="list-group-item-heading">{{question.title}}</h4>
-      <p class="list-group-item-text">{{question.content}}</p>
-      <p class="list-group-item-text">By: {{question.author.name}}</p>
+    <div class="panel panel-primary">
+      <div class="panel-heading">{{question.title}}</div>
+      <div class="panel-body">
+        <div class="col-md-9">
+          {{question.content}}
+        </div>
+        <div class="col-md-3 text-center">
+          By: {{question.author.name}}
+        </div>
+      </div>
+      <div class="panel-footer">
+        <div>
+          <button @click="voting(question._id, question.author._id, 'up')" class="btn btn-danger btn-sm" type="button" name="button">
+            <i class="glyphicon glyphicon-hand-up">Up</i>
+          </button> : {{question.upvotes.length}}
+          <button @click="voting(question._id, question.author._id, 'down')" class="btn btn-warning btn-sm" type="button" name="button">
+            <i class="glyphicon glyphicon-hand-down">Down</i>
+          </button> : {{question.downvotes.length}}
+        </div>
+      </div>
     </div>
-    <div v-for="answer in question.answer" href="#" class="list-group-item">
-      <p class="list-group-item-text">{{answer.content}}</p>
-      <p class="list-group-item-text">by: {{answer.author.name}}</p>
+
+    <div v-for="answer in question.answer" class="panel panel-info">
+      <div class="panel-heading">from: {{answer.author.name}}</div>
+      <div class="panel-body">
+        {{answer.content}}
+      </div>
     </div>
+
     <AddAnswer></AddAnswer>
   </div>
 </template>
@@ -28,8 +48,12 @@
     },
     methods: {
       ...mapActions([
-        'getOneQuestion'
-      ])
+        'getOneQuestion',
+        'voteQuestion'
+      ]),
+      voting (id, idUser, status) {
+        this.voteQuestion({id, idUser, status})
+      }
     },
     created () {
       this.getOneQuestion(this.id)

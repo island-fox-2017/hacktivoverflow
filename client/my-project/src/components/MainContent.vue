@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <hr>
         <!-- INPUT TITLE -->
-        <AddQuestion :user="user" :questions="questions"></AddQuestion>
+
         <!-- END INPUT TITLE -->
         <!-- LIST QUESTIOn -->
         <router-view></router-view>
@@ -20,14 +20,12 @@
 
 <script>
   import Sidebar from '@/components/Sidebar'
-  import AddQuestion from '@/components/AddQuestion'
   import { mapActions } from 'vuex'
   export default{
     props: ['questions', 'count', 'user'],
     name: 'maincontent',
     components: {
-      Sidebar,
-      AddQuestion
+      Sidebar
     },
     methods: {
       ...mapActions([

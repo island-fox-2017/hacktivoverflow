@@ -3,11 +3,12 @@
 const express = require('express')
 const router = express.Router()
 const controller = require('../controllers/questionController')
+const middleware = require('../helpers/auth')
 
 router.get('/', controller.getAllQuestion)
 router.get('/:id', controller.getOneQuestion)
-router.post('/', controller.createQuestion)
-router.post('/:id/answer', controller.addAnswer)
-router.put('/:id/:iduser', controller.voteQuestion)
+router.post('/', middleware.auth, controller.createQuestion)
+router.post('/:id/answer', middleware.auth, controller.addAnswer)
+router.put('/:id/:iduser', middleware.auth, controller.voteQuestion)
 
 module.exports = router;

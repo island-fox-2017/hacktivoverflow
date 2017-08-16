@@ -2,6 +2,7 @@
 
 const Question = require('../models/Question')
 
+
 function voteQuestion(req,res) {
   Question.findById(req.params.id)
   .then(response => {
