@@ -10,5 +10,6 @@ router.get('/:id', controller.getOneQuestion)
 router.post('/', middleware.auth, controller.createQuestion)
 router.post('/:id/answer', middleware.auth, controller.addAnswer)
 router.put('/:id/:iduser', middleware.auth, controller.voteQuestion)
+router.delete('/:id', controller.deleteQuestion)
 
 module.exports = router;

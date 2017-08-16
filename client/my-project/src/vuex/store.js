@@ -154,6 +154,16 @@ export default new Vuex.Store({
     },
     logoutFrom ({ commit }) {
       commit('clearState')
+    },
+    deleteQuestion ({ dispatch }, id) {
+      axios.delete(`http://localhost:3000/question/${id}`)
+      .then(response => {
+        console.log(response)
+        dispatch('getAllQuestions')
+      })
+      .catch(err => {
+        console.log(err)
+      })
     }
   }
 })

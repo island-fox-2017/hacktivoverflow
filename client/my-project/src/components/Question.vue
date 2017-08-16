@@ -8,9 +8,9 @@
             <h4 class="list-group-item-heading">{{question.title}}</h4>
           </div>
           <div class="col-md-4">
-            <div><button @click="voting(question._id, question.author._id, 'up')" class="btn btn-danger btn-sm" type="button" name="button">
+            <div><button @click="voting(question._id, userId, 'up')" class="btn btn-danger btn-sm" type="button" name="button">
               <i class="glyphicon glyphicon-hand-up">Up</i></button> : {{question.upvotes.length}}
-              <button @click="voting(question._id, question.author._id, 'down')" class="btn btn-warning btn-sm" type="button" name="button">
+              <button @click="voting(question._id, userId, 'down')" class="btn btn-warning btn-sm" type="button" name="button">
                 <i class="glyphicon glyphicon-hand-down">Down</i></button> : {{question.downvotes.length}}
               </div>
             </div>
@@ -21,6 +21,7 @@
               <router-link :to="{ name: 'details', params: { id: question._id} }">
                 <button class="btn btn-success btn-sm" type="button" name="button">details</button>
               </router-link>
+              <button v-if="question.author._id == userId" @click="deleteQuest(question._id)" class="btn btn-danger btn-sm" type="button" name="button">Delete</button>
             </div>
             <div class="col-md-4">
               <h6 class="list-group-item-text">Author: {{question.author.name}}</h6>
@@ -42,14 +43,21 @@
     computed: {
       listSummary: function () {
         return this.$store.state.questions
+      },
+      userId () {
+        return this.$store.state.userId
       }
     },
     methods: {
       ...mapActions([
-        'voteQuestion'
+        'voteQuestion',
+        'deleteQuestion'
       ]),
       voting (id, idUser, status) {
         this.voteQuestion({id, idUser, status})
+      },
+      deleteQuest (id) {
+        this.deleteQuestion(id)
       }
     }
   }
