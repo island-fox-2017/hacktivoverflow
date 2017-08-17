@@ -18,3 +18,22 @@ List of hacktiv-overflow routes:
 | /question/:id/:iduser  |PUT            | voting specify question|
 | /question/:id/answer    |PUT            | Put answer to the question|
 | /question/:id/answer/:id|DELETE         | Delete answer From the question|
+
+
+## how to run
+
+```bash
+server-side:
+
+npm install
+
+npm start
+
+client-side
+
+cd client/my-project
+
+npm install
+
+npm run dev
+```
