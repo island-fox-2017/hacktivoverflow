@@ -1,23 +1,30 @@
-<template>
-  <div id="app">
-    <NavBar :user="user"></NavBar>
-    <router-view></router-view>
+<template lang="html">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <ThreadList :user="user"></ThreadList>
+      </div>
+      <div class="col-md-3" v-if="token">
+        <NewThread :creator="token"></NewThread>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import NavBar from '@/components/NavBar'
+import ThreadList from '@/components/ThreadList'
+import NewThread from '@/components/NewThread'
 export default {
   components: {
-    NavBar
+    ThreadList,
+    NewThread
   },
-  name: 'app',
   data () {
     return {
       token: null,
       user: {
-        id: '',
-        name: ''
+        id: null,
+        name: null
       }
     }
   },
@@ -32,6 +39,7 @@ export default {
       })
       .then(function (response) {
         self.user = response.data
+        localStorage.setItem('user', JSON.stringify(response.data))
       })
     }
   },
@@ -42,11 +50,5 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
+<style lang="css">
 </style>

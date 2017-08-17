@@ -24,6 +24,7 @@
     "express": "^4.15.4",
     "jsonwebtoken": "^7.4.2",
     "mongoose": "^4.11.7",
+    "mongoose-unique-validator": "^1.0.5",
     "validator": "^8.0.0"
   }
 }

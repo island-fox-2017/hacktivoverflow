@@ -9,7 +9,11 @@ const threadSchema = new Schema ({
   threadContent: {
     type: String,
     required: [true, 'Content tidak boleh kosong']
-  }
+  },
+  creator: { type: Schema.Types.ObjectId, ref: 'User' },
+  replies: [{type: Schema.Types.ObjectId, ref: 'Response' }],
+  upvotes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  downvotes: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 }, {
   timestamps: true
 });
