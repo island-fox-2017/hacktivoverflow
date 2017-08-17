@@ -12,10 +12,10 @@
       </div>
       <div class="panel-footer">
         <div>
-          <button @click="voting(question._id, question.author._id, 'up')" class="btn btn-danger btn-sm" type="button" name="button">
+          <button @click="voting(question._id, userId, 'up')" class="btn btn-danger btn-sm" type="button" name="button">
             <i class="glyphicon glyphicon-hand-up">Up</i>
           </button> : {{question.upvotes.length}}
-          <button @click="voting(question._id, question.author._id, 'down')" class="btn btn-warning btn-sm" type="button" name="button">
+          <button @click="voting(question._id, userId, 'down')" class="btn btn-warning btn-sm" type="button" name="button">
             <i class="glyphicon glyphicon-hand-down">Down</i>
           </button> : {{question.downvotes.length}}
         </div>
@@ -28,10 +28,10 @@
         {{answer.content}}
       </div>
       <div class="panel-footer">
-        <button @click="votingAnswer(question._id, question.author._id, answer._id, 'up')" class="btn btn-danger btn-sm" type="button" name="button">
+        <button @click="votingAnswer(question._id, userId, answer._id, 'up')" class="btn btn-danger btn-sm" type="button" name="button">
           <i class="glyphicon glyphicon-hand-up">Up</i>
         </button> : {{answer.upvotes.length}}
-        <button @click="votingAnswer(question._id, question.author._id, answer._id, 'down')" class="btn btn-warning btn-sm" type="button" name="button">
+        <button @click="votingAnswer(question._id, userId, answer._id, 'down')" class="btn btn-warning btn-sm" type="button" name="button">
           <i class="glyphicon glyphicon-hand-down">Down</i>
         </button> : {{answer.downvotes.length}}
       </div>
@@ -49,6 +49,9 @@
     computed: {
       question () {
         return this.$store.state.question
+      },
+      userId () {
+        return this.$store.state.userId
       }
     },
     components: {
