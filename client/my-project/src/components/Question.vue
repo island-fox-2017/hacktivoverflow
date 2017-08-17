@@ -57,7 +57,9 @@
         this.voteQuestion({id, idUser, status})
       },
       deleteQuest (id) {
-        this.deleteQuestion(id)
+        if (window.confirm('Are you sure want to delete this Question?')) {
+          this.deleteQuestion(id)
+        }
       }
     }
   }

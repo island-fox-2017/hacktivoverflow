@@ -5,7 +5,7 @@
     </div>
     <div class="form-group text-right">
       <button v-if="idAuthor" @click="pushAnswers()" type="button" class="btn btn-warning">Answer</button>
-      <button v-else type="button" class="btn btn-warning" disabled>Answer</button>
+      <button v-else type="button" class="btn btn-warning" disabled>Login First</button>
       <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#demo">Cancel</button>
     </div>
   </div>
