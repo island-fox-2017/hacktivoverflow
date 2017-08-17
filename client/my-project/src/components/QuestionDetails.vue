@@ -27,6 +27,14 @@
       <div class="panel-body">
         {{answer.content}}
       </div>
+      <div class="panel-footer">
+        <button @click="votingAnswer(question._id, question.author._id, answer._id, 'up')" class="btn btn-danger btn-sm" type="button" name="button">
+          <i class="glyphicon glyphicon-hand-up">Up</i>
+        </button> : {{answer.upvotes.length}}
+        <button @click="votingAnswer(question._id, question.author._id, answer._id, 'down')" class="btn btn-warning btn-sm" type="button" name="button">
+          <i class="glyphicon glyphicon-hand-down">Down</i>
+        </button> : {{answer.downvotes.length}}
+      </div>
     </div>
 
     <AddAnswer></AddAnswer>
@@ -49,10 +57,14 @@
     methods: {
       ...mapActions([
         'getOneQuestion',
-        'voteQuestion'
+        'voteQuestion',
+        'voteAnswer'
       ]),
       voting (id, idUser, status) {
         this.voteQuestion({id, idUser, status})
+      },
+      votingAnswer (id, iduser, idanswer, status) {
+        this.voteAnswer({id, iduser, idanswer, status})
       }
     },
     created () {

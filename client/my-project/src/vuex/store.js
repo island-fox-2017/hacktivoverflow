@@ -164,6 +164,18 @@ export default new Vuex.Store({
       .catch(err => {
         console.log(err)
       })
+    },
+    voteAnswer ({ commit, dispatch }, payload) {
+      axios.put(`http://localhost:3000/question/${payload.id}/${payload.iduser}/${payload.idanswer}`, {
+        status: payload.status
+      })
+      .then(response => {
+        dispatch('getOneQuestion', payload.id)
+        console.log(response)
+      })
+      .catch(err => {
+        console.log(err)
+      })
     }
   }
 })
