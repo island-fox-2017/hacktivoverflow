@@ -23,13 +23,13 @@ List of hacktiv-overflow routes:
 ## how to run
 
 ```bash
-server-side:
+### server-side:
 
 npm install
 
 npm start
 
-client-side
+### client-side
 
 cd client/my-project
 
