@@ -29,55 +29,196 @@ function voteQuestion(req,res) {
   .then(response => {
     var status = false
 
-    for (let i = 0; i < response.downvotes.length; i++) {
-      response.upvotes[i] == req.params.iduser
-      status = true
-    }
+    //cek status jika up
+    if(req.body.status == 'up'){
+      // cek di downvotes
+      for (let i = 0; i < response.downvotes.length; i++) {
+        if(response.downvotes[i] == req.params.iduser){
+          status = true
+        }
+      }
 
-    for (let i = 0; i < response.upvotes.length; i++) {
-      response.upvotes[i] == req.params.iduser
-      status = true
-    }
-
-    if(status){
-      res.send({msg: 'Already Vote'})
-    }else {
-      if(req.body.status == 'up'){
+      //jika ada hapus dari downvote
+      if(status){
+        let newData = response.downvotes.filter(function(vote){
+          return vote != req.params.iduser
+        })
+        console.log(response.downvotes);
+        console.log(newData);
+        //update downvote dengan data baru
         Question.where({
           _id: req.params.id
         })
         .update({
-          $push: {
-            upvotes: req.params.iduser
-          }
+          downvotes: newData
         })
-        .then(response => {
-          res.send({msg: 'voteSukses'})
+        .then(resp => {
+          Question.where({
+            _id: req.params.id
+          })
+          .update({
+            $push: {
+              upvotes: req.params.iduser
+            }
+          })
+          .then(response => {
+            res.send({msg: 'voteSukses'})
+          })
+          .catch(err => {
+            res.send(err)
+          })
         })
         .catch(err => {
           res.send(err)
         })
       }else {
+        //cek di upvotes
+        for (let i = 0; i < response.upvotes.length; i++) {
+          if(response.upvotes[i] == req.params.iduser){
+            status = true
+          }
+        }
+        // jika ada
+        if(status){
+          res.send({msg: 'already vote'})
+        }else {
+          Question.where({
+            _id: req.params.id
+          })
+          .update({
+            $push: {
+              upvotes: req.params.iduser
+            }
+          })
+          .then(response => {
+            res.send({msg: 'voteSukses'})
+          })
+          .catch(err => {
+            res.send(err)
+          })
+        }
+      }
+    }else {
+      //cek di up
+      for (let i = 0; i < response.upvotes.length; i++) {
+        if(response.upvotes[i] == req.params.iduser){
+          status = true
+        }
+      }
+
+      if(status){
+        // jika ada hapus dalam up
+        let newData = response.upvotes.filter(function(vote){
+          return vote != req.params.iduser
+        })
+
+        //update data di upvotes
         Question.where({
           _id: req.params.id
         })
         .update({
-          $push: {
-            downvotes: req.params.iduser
-          }
+          upvotes: newData
         })
-        .then(response => {
-          res.send({msg: 'voteSukses'})
+        .then(resp => {
+          //push data di downvotes
+          Question.where({
+            _id: req.params.id
+          })
+          .update({
+            $push: {
+              downvotes: req.params.iduser
+            }
+          })
+          .then(response => {
+            res.send({msg: 'voteSukses'})
+          })
+          .catch(err => {
+            res.send(err)
+          })
         })
         .catch(err => {
-          res.send(err)
+          console.log(err)
         })
+      }else {
+        //cek di downvotes
+        for (let i = 0; i < response.downvotes.length; i++) {
+          if(response.downvotes[i] == req.params.iduser){
+            status = true
+          }
+        }
+
+        if(status){
+          console.log(status);
+          res.send({msg: 'already votes'})
+        }else {
+          Question.where({
+            _id: req.params.id
+          })
+          .update({
+            $push: {
+              downvotes: req.params.iduser
+            }
+          })
+          .then(response => {
+            res.send({msg: 'voteSukses'})
+          })
+          .catch(err => {
+            res.send(err)
+          })
+        }
       }
     }
-  })
-  .catch(err => {
-    res.send(err)
-  })
+  //
+  //   for (let i = 0; i < response.downvotes.length; i++) {
+  //     response.upvotes[i] == req.params.iduser
+  //     status = true
+  //   }
+  //
+  //   for (let i = 0; i < response.upvotes.length; i++) {
+  //     response.upvotes[i] == req.params.iduser
+  //     status = true
+  //   }
+  //
+  //   if(status){
+  //     res.send({msg: 'Already Vote'})
+  //   }else {
+  //     if(req.body.status == 'up'){
+  //       Question.where({
+  //         _id: req.params.id
+  //       })
+  //       .update({
+  //         $push: {
+  //           upvotes: req.params.iduser
+  //         }
+  //       })
+  //       .then(response => {
+  //         res.send({msg: 'voteSukses'})
+  //       })
+  //       .catch(err => {
+  //         res.send(err)
+  //       })
+  //     }else {
+  //       Question.where({
+  //         _id: req.params.id
+  //       })
+  //       .update({
+  //         $push: {
+  //           downvotes: req.params.iduser
+  //         }
+  //       })
+  //       .then(response => {
+  //         res.send({msg: 'voteSukses'})
+  //       })
+  //       .catch(err => {
+  //         res.send(err)
+  //       })
+  //     }
+  //   }
+  // })
+  // .catch(err => {
+  //   res.send(err)
+  // })
+})
 }
 
 function getAllQuestion(req,res){
