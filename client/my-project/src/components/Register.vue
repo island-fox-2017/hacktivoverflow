@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-6 verticalLine">
-    <form class="form-horizontal" @submit.prevent="register()">
+    <form class="form-horizontal">
       <div class="form-group">
         <div class="col-sm-12">
           <input v-model="formRegis.username" type="text" class="form-control" placeholder="Username" required>
@@ -23,7 +23,7 @@
       </div>
       <div class="form-group text-right">
         <div class="col-sm-12">
-          <button type="submit" class="btn btn-danger">Register</button>
+          <button type="button" class="btn btn-danger" @click="register()" data-dismiss="modal">Register</button>
         </div>
       </div>
     </form>
@@ -55,6 +55,13 @@ export default{
       })
       .then(response => {
         console.log(response)
+        this.formRegis = {
+          username: '',
+          name: '',
+          email: '',
+          password: ''
+        }
+        alert('register sukses')
       })
       .catch(err => {
         console.log(err)

@@ -4,8 +4,8 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
-// const url = "mongodb://sukmahd:vongola12@cluster0-shard-00-00-h9kzb.mongodb.net:27017,cluster0-shard-00-01-h9kzb.mongodb.net:27017,cluster0-shard-00-02-h9kzb.mongodb.net:27017/hacktiv-overflow?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin"
-mongoose.connect('mongodb://localhost/hacktiv-overflow-sukmo')
+const url = "mongodb://sukmahd:vongola12@cluster0-shard-00-00-h9kzb.mongodb.net:27017,cluster0-shard-00-01-h9kzb.mongodb.net:27017,cluster0-shard-00-02-h9kzb.mongodb.net:27017/hacktiv-overflow-sukmoo?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin"
+mongoose.connect(url)
 
 const cors = require('cors')
 
