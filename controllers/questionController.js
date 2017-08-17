@@ -4,20 +4,53 @@ const Question = require('../models/Question')
 
 
 function voteAnswer(req,res) {
-  const idAnswer = '599443f94aa4e03f73118ca9'
   Question.findById(req.params.id)
   .then(response => {
-    const newData = response.answer.map(function(ans){
-      if(ans._id == idAnswer){
-        ans.upvotes.push(req.params.iduser)
-        return ans
-      }else {
-        return ans
-      }
-    })
+    if(req.body.status == 'up'){
+      const newData = response.answer.map(function(ans){
+        if(ans._id == req.params.idanswer){
+          ans.upvotes.push(req.params.iduser)
+          return ans
+        }else {
+          return ans
+        }
+      })
 
-    console.log(newData);
-    // res.send(response)
+      Question.where({
+        _id: req.params.id
+      })
+      .update({
+        answer: newData
+      })
+      .then(response => {
+        res.send(response)
+      })
+      .catch(err => {
+        res.send(err)
+      })
+    }else {
+      const newData = response.answer.map(function(ans){
+        if(ans._id == req.params.idanswer){
+          ans.downvotes.push(req.params.iduser)
+          return ans
+        }else {
+          return ans
+        }
+      })
+
+      Question.where({
+        _id: req.params.id
+      })
+      .update({
+        answer: newData
+      })
+      .then(response => {
+        res.send(response)
+      })
+      .catch(err => {
+        res.send(err)
+      })
+    }
   })
   .catch(err => {
     res.send(err)
