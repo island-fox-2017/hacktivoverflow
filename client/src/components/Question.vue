@@ -2,7 +2,7 @@
   <div class="col-md-offset-4">
     <h1>{{title}}</h1>
     <ul>
-      <li v-for="question in questions">{{question}}</li>
+      <li v-for="question in questions">{{question.title}}</li>
     </ul>
   </div>
 </template>

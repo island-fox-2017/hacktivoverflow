@@ -3,6 +3,16 @@ const jwt = require('jsonwebtoken')
 const helper = require('../helpers/registration')
 require('dotenv').config()
 
+function getAllUser(req, res){
+  user.find()
+    .then(response => {
+      res.send(response)
+    })
+    .catch(err => {
+      res.send(err)
+    })
+}
+
 function signup(req,res){
   let salt = helper.random();
   let pass = helper.cryptoPass(req.body.password, salt)
@@ -22,6 +32,7 @@ function signup(req,res){
 }
 
 function signin (req, res){
+  //console.log('secret nih ', process.env.SECRET_KEY)
   user.findOne({
     username: req.body.username
   })
@@ -35,19 +46,26 @@ function signin (req, res){
         username: response.username,
         email: response.email
       }, process.env.SECRET_KEY)
-      req.headers.token = token
+      // req.headers.token = token
+          // ga kepake lg.. soal sudah ga jadi middleware lg! - di server..
+          // klo di client dia bukan middleware
       let objectGabungan = {
         token: token,
-        id: response._id
+        id: response._id,
+        fullname: response.fullname
       }
+      console.log('obj gbngn');
       res.send(objectGabungan)
-        // res.json({token:token, id: response._id})
-        //res.send(token)
+      // disini proses auth e dah kelar!! - ntar tinggal otorisasi ne..
+
+      // token dpt di client,, trus disimpen !! ( token ga ada password koq.. jd no problem)
+
     } else {
       res.send('incorrect password!')
     }
   })
   .catch(err =>{
+    console.log('ternyata error', err)
     res.send(err)
   })
 }
@@ -55,5 +73,6 @@ function signin (req, res){
 
 module.exports = {
   signup,
-  signin
+  signin,
+  getAllUser
 };
