@@ -2,7 +2,8 @@
   <div class="col-md-offset-4">
     <h1>{{title}}</h1>
     <ul>
-      <li v-for="question in questions">{{question.title}}</li>
+      <!-- <li v-for="question in questions">{{question.title}} The author: {{question.author.fullname}} </li> -->
+      <li v-for="question in questions">{{question}} </li>
     </ul>
   </div>
 </template>
@@ -12,7 +13,7 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      title: 'Questions Place',
+      title: 'List Questions',
       questions: []
     }
   },
