@@ -1,9 +1,11 @@
 <template>
-  <div class="col-md-12">
+  <div class="container col-md-12">
     <!-- <h1>{{title}}</h1> -->
     <app-header></app-header>
     <!-- <navi></navi> udah ok kt hilangin dl-->
     <router-view></router-view>
+    <br>
+    <br>
     <app-footer :namaNinja="ninjas"></app-footer>
   </div>
 </template>

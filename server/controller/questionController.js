@@ -3,7 +3,9 @@ const question = require ('../models/question')
 function findAllQuestion(req, res) {
   question.find()
   .populate('author', 'fullname')
-  // udah dpt tp full semuane.. klo mau cuma dptin fullname?
+  // udah dpt tp full semua ne ttg author.. klo mau lebih dlm pake cara diatas.. dpt fullname
+  // yg answer ga dipopulate gpp.. soal otomatis (memang sudah bagian / bukan ref)
+  .populate('answers.author')
   .then ( response => {
     res.send(response)
   })

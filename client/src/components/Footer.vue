@@ -1,13 +1,15 @@
 <template>
-  <footer>
-    <h6> {{copyright}}</h6>
-    <ul>
-      <li v-for="ninja in namaNinja">
-        <h2> {{ninja.name}} </h2>
-        <h2> {{ninja.gender}} </h2>
-      </li>
-    </ul>
-  </footer>
+  <div class="container col-md-12">
+    <footer>
+      <h6> {{copyright}}</h6>
+      <ul>
+        <li v-for="ninja in namaNinja">
+          <h2> {{ninja.name}} </h2>
+          <h2> {{ninja.gender}} </h2>
+        </li>
+      </ul>
+    </footer>
+  </div>
 </template>
 
 <script>
@@ -23,7 +25,7 @@ export default {
 
 <style scoped>
 footer {
-  background: #ADD8E6;
+  background: #fff;
   border: solid 2px black
 }
 
